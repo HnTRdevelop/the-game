@@ -1,0 +1,33 @@
+{
+  "Entities": [
+    {
+      "id": 0,
+      "name": "test_object",
+      "components": [
+        {
+          "type": "HnTRgine.Transform",
+          "position": "640,360",
+          "scale": "-1,1",
+          "rotation": 0
+        },
+        {
+          "type": "HnTRgine.Sprite",
+          "image": "sprites/down.png"
+        },
+        {
+          "type": "TheGame.TestScript"
+        },
+        {
+          "type": "TheGame.NewComponent",
+          "a": 58,
+          "b": 20
+        }
+      ]
+    }
+  ],
+  "Systems": [
+    "HnTRgine.SpriteRenderingSystem",
+    "HnTRgine.ScriptManagementSystem",
+    "TheGame.NewSystem"
+  ]
+}
