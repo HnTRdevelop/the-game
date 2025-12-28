@@ -1,8 +1,12 @@
 using Raylib_cs;
 
 
-namespace HnTRgine
+namespace HnTRgine.Systems
 {
+    using HnTRgine.Vectors;
+    using HnTRgine.Components;
+    using HnTRgine.EntityManagement;
+
     abstract class System
     {
         public abstract Type[] RequiredComponents { get; protected set; }
@@ -19,23 +23,22 @@ namespace HnTRgine
 
         public override void Update(Entity entity)
         {
-            Sprite sprite = entity.GetComponent<Sprite>();
-            Transform transform = entity.GetComponent<Transform>();
+            Texture2D texture = entity.GetComponent<Sprite>().Texture;
             Raylib.DrawTexturePro(
-                sprite.Texture, 
+                texture, 
                 new Rectangle(
                     0, 
                     0, 
-                    sprite.Texture.Dimensions.X * Math.Sign(transform.scale.x), 
-                    sprite.Texture.Dimensions.Y * Math.Sign(transform.scale.y)),
-                new Rectangle(transform.position,
-                    MathF.Abs((float)transform.scale.x) * sprite.Texture.Width, 
-                    MathF.Abs((float)transform.scale.y) * sprite.Texture.Height),
+                    texture.Dimensions.X * Math.Sign(entity.transform.scale.x), 
+                    texture.Dimensions.Y * Math.Sign(entity.transform.scale.y)),
+                new Rectangle(entity.transform.position,
+                    MathF.Abs((float)entity.transform.scale.x) * texture.Width, 
+                    MathF.Abs((float)entity.transform.scale.y) * texture.Height),
                 new Vector2D(
-                    Math.Abs(transform.scale.x) * sprite.Texture.Dimensions.X * 0.5f,
-                    Math.Abs(transform.scale.y) * sprite.Texture.Dimensions.Y * 0.5f
+                    Math.Abs(entity.transform.scale.x) * texture.Dimensions.X * 0.5f,
+                    Math.Abs(entity.transform.scale.y) * texture.Dimensions.Y * 0.5f
                 ), 
-                (float)transform.rotation, 
+                (float)entity.transform.rotation, 
                 Color.White
             );
         }
@@ -58,7 +61,7 @@ namespace HnTRgine
         {
             Script[] scripts = entity.GetScripts().ToArray();
             foreach (Script script in scripts)
-                script.Update(Raylib.GetFrameTime());
+                script.Update();
         }
     }
 }

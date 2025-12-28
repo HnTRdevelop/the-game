@@ -1,7 +1,7 @@
 using System.Numerics;
 
 
-namespace HnTRgine
+namespace HnTRgine.Vectors
 {
     class Vector2D
     {

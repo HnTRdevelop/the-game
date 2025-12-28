@@ -1,10 +1,13 @@
+using Raylib_cs;
 using System.Text.Json;
 using System.Text.Json.Nodes;
-using Raylib_cs;
 
 
-namespace HnTRgine
+namespace HnTRgine.Components
 {    
+    using HnTRgine.Vectors;
+    using HnTRgine.EntityManagement;
+
     abstract class Component
     {
         private Entity? _owner;
@@ -30,7 +33,7 @@ namespace HnTRgine
         public Transform()
         {
             position = new Vector2D();
-            scale = new Vector2D();
+            scale = new Vector2D(1);
         }
         
         public Transform(Vector2D position)
@@ -45,7 +48,7 @@ namespace HnTRgine
             this.scale = scale is null ? new Vector2D(1, 1) : scale;
         }
 
-        public void Translate(Vector2D translation) => this.position += translation;
+        public void Translate(Vector2D translation) => position += translation;
 
         public void Scale(Vector2D scale) => this.scale += scale;
         public void Scale(double scale) => this.scale *= scale;
@@ -84,7 +87,6 @@ namespace HnTRgine
 
         public Sprite(string image)
         {
-            this.image = image;
             LoadImage(image);
         }
 
@@ -111,6 +113,6 @@ namespace HnTRgine
     abstract class Script : Component
     {
         public virtual void Init() { }
-        public virtual void Update(double deltaTime) { }
+        public virtual void Update() { }
     }
 }

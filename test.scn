@@ -5,20 +5,20 @@
       "name": "test_object",
       "components": [
         {
-          "type": "HnTRgine.Transform",
-          "position": "700,400",
-          "scale": "0.2,0.2",
+          "type": "HnTRgine.Components.Transform",
+          "position": "960,540",
+          "scale": "0.4,0.4",
           "rotation": 0
         },
         {
-          "type": "HnTRgine.Sprite",
-          "image": "sprites/down.png"
+          "type": "HnTRgine.Components.Sprite",
+          "image": "sprites/flag.png"
         }
       ]
     }
   ],
   "Systems": [
-    "HnTRgine.SpriteRenderingSystem",
-    "HnTRgine.ScriptManagementSystem"
+    "HnTRgine.Systems.SpriteRenderingSystem",
+    "HnTRgine.Systems.ScriptManagementSystem"
   ]
 }
