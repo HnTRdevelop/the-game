@@ -37,6 +37,7 @@ namespace HnTRgine.EntityManagement
             components[component.GetType()] = component;
             if (component is Script && Game.IsRunning && Game.CurrentScene.HasSystem<ScriptManagementSystem>())
                 Game.CurrentScene.InitSystem(Game.CurrentScene.GetSystem<ScriptManagementSystem>(), this);
+            if (component is Camera && Game.mainCamera is null) Game.mainCamera = component as Camera;
             return component;
         }
 
@@ -53,7 +54,7 @@ namespace HnTRgine.EntityManagement
                 throw new Exception($"Can't remove component! Entity {this} do not have {typeof(T)} component");
             components.Remove(typeof(T));
         }
-        
+
         public IEnumerable<Script> GetScripts()
         {
             return components.Where(kvp => typeof(Script).IsAssignableFrom(kvp.Key)).Select(kvp => kvp.Value as Script);

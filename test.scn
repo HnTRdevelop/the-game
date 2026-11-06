@@ -6,8 +6,8 @@
       "components": [
         {
           "type": "HnTRgine.Components.Transform",
-          "position": "960,540",
-          "scale": "0.4,0.4",
+          "position": "640,360",
+          "scale": "0.2,0.2",
           "rotation": 0
         },
         {

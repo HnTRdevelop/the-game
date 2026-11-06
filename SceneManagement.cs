@@ -61,7 +61,7 @@ namespace HnTRgine.SceneManagement
                 if (e.name == name) entities.Remove(e.Id);
             throw new Exception($"Can't remove entity! Scene do not have entity with name: {name}");
         }
-        
+
         public bool HasSystem<T>() where T : System
         {
             return HasSystem(typeof(T));
@@ -161,12 +161,7 @@ namespace HnTRgine.SceneManagement
                     if (string.IsNullOrEmpty(componentName))
                         continue;
 
-                    Type? componentType = Type.GetType(componentName);
-                    if (componentType == null)
-                    {
-                        Console.WriteLine($"Warning: Could not find type '{componentName}' for script component. Skipping.");
-                        continue;
-                    }
+                    Type componentType = Type.GetType(componentName) ?? throw new NullReferenceException($"Could not find type '{componentName}' for script component.");
 
                     object? instance = Activator.CreateInstance(componentType);
                     if (instance is Component component)
@@ -192,12 +187,7 @@ namespace HnTRgine.SceneManagement
                 if (string.IsNullOrEmpty(systemName))
                     continue;
 
-                Type? systemType = Type.GetType(systemName);
-                if (systemType == null)
-                {
-                    Console.WriteLine($"Warning: Could not find type '{systemName}' for script component. Skipping.");
-                    continue;
-                }
+                Type systemType = Type.GetType(systemName) ?? throw new NullReferenceException($"Could not find type '{systemName}' for script component.");
 
                 object? instance = Activator.CreateInstance(systemType);
                 if (instance is System system)
