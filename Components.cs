@@ -111,14 +111,9 @@ namespace HnTRgine.Components
 
         private Raylib_cs.Camera3D camera;
         public Vector3D forward;
-        public Vector3D target
-        {
-            get => camera.Target;
-            set => camera.Target = value;
-        }
         public Vector3D up
         {
-            get => camera.Up;
+            get => (Vector3D)camera.Up;
             set => camera.Up = value;
         }
         public float fov_y
@@ -131,11 +126,6 @@ namespace HnTRgine.Components
             get => (Projection)camera.Projection;
             set => camera.Projection = (CameraProjection)value;
         }
-        public Vector3D position
-        {
-            get => camera.Position;
-            set => camera.Position = value;
-        }
 
         public Camera(float? fov_y=null, Vector3D? up=null, Vector3D? forward=null, Projection? projection=null)
         {
@@ -146,6 +136,21 @@ namespace HnTRgine.Components
             this.projection = projection ?? Projection.Perspective;
         }
 
+        public void FetchData(Entity entity)
+        {
+            camera.Position = entity.transform.position;
+            camera.Target = entity.transform.position + this.forward;
+        }
+
         public static implicit operator Camera3D(Camera cam) => cam.camera;
+    }
+
+    class Mesh : Component
+    {
+        public static Mesh LoadFromFile(string filepath) => new Mesh();
+        public Vector3D[] verticies;
+        public Vector3D[] normals;
+        public int[] triangles;
+        public Vector2D[] UV;
     }
 }

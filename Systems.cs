@@ -71,20 +71,8 @@ namespace HnTRgine.Systems
             typeof(Camera)
         ];
 
-        private Vector3D a = new Vector3D();
+        public override void Init(Entity entity) => entity.GetComponent<Camera>().FetchData(entity);
 
-        public override void Init(Entity entity)
-        {
-            Camera camera = entity.GetComponent<Camera>();
-            camera.position = entity.transform.position;
-            camera.target = camera.target + camera.position;
-        }
-
-        public override void Update(Entity entity)
-        {
-            Camera camera = entity.GetComponent<Camera>();
-            camera.position = entity.transform.position;
-            camera.target = camera.forward + camera.position;
-        }
+        public override void Update(Entity entity) => entity.GetComponent<Camera>().FetchData(entity);
     }
 }

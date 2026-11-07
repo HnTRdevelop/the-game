@@ -26,11 +26,9 @@ namespace HnTRgine
             {
                 Raylib.BeginDrawing();
                 Raylib.ClearBackground(Color.Black);
-
-                Raylib.BeginMode3D(mainCamera);
+                if (mainCamera is not null) Raylib.BeginMode3D(mainCamera);
                 Update();
-                Raylib.EndMode3D();
-
+                if (mainCamera is not null) Raylib.EndMode3D();
                 Raylib.DrawFPS(0, 0);
                 Raylib.EndDrawing();
             }

@@ -8,6 +8,7 @@ namespace TheGame
 {
     using HnTRgine.Components;
     using HnTRgine.Systems;
+    using HnTRgine.InputManager;
 
     internal class Program
     {
@@ -26,12 +27,33 @@ namespace TheGame
 
             Entity cam = new Entity();
             Camera c = cam.AddComponent(new Camera());
-            cam.transform.position = new Vector3D(0, 1, -2);
+            cam.AddComponent(new PlayerController());
+            cam.transform.position = new Vector3D(0, 1, -3);
 
             Game.CurrentScene.AddEntity(cam);
             Game.CurrentScene.AddSystem(new CameraRendererSystem());
+            Game.CurrentScene.AddSystem(new ScriptManagementSystem());
 
             game.GameLoop();
+        }
+    }
+
+    class PlayerController : Script
+    {
+        public override void Update()
+        {
+            if (Input.IsKeyDown(Key.W))
+                owner.transform.position += Vector3D.forward * Time.deltaTime * 5;
+            if (Input.IsKeyDown(Key.S))
+                owner.transform.position += Vector3D.back * Time.deltaTime * 5;
+            if (Input.IsKeyDown(Key.A))
+                owner.transform.position -= Vector3D.left * Time.deltaTime * 5;
+            if (Input.IsKeyDown(Key.D))
+                owner.transform.position -= Vector3D.right * Time.deltaTime * 5;
+            if (Input.IsKeyDown(Key.E))
+                owner.transform.position += Vector3D.up * Time.deltaTime * 5;
+            if (Input.IsKeyDown(Key.Q))
+                owner.transform.position += Vector3D.down * Time.deltaTime * 5;
         }
     }
 }
