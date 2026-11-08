@@ -1,5 +1,4 @@
-﻿using System;
-using HnTRgine;
+﻿using HnTRgine;
 using HnTRgine.EntityManagement;
 using HnTRgine.Vectors;
 
@@ -30,9 +29,20 @@ namespace TheGame
             cam.AddComponent(new PlayerController());
             cam.transform.position = new Vector3D(0, 1, -3);
 
+            Entity mesh = new Entity();
+            mesh.AddComponent(new Mesh());
+
+            Entity mesh2 = new Entity();
+            mesh2.AddComponent(new Mesh());
+            mesh2.transform.position = new Vector3D(-3, 0, 0);
+
             Game.CurrentScene.AddEntity(cam);
+            Game.CurrentScene.AddEntity(mesh);
+            Game.CurrentScene.AddEntity(mesh2);
+
             Game.CurrentScene.AddSystem(new CameraRendererSystem());
             Game.CurrentScene.AddSystem(new ScriptManagementSystem());
+            Game.CurrentScene.AddSystem(new MeshRendererSystem());
 
             game.GameLoop();
         }
@@ -47,9 +57,9 @@ namespace TheGame
             if (Input.IsKeyDown(Key.S))
                 owner.transform.position += Vector3D.back * Time.deltaTime * 5;
             if (Input.IsKeyDown(Key.A))
-                owner.transform.position -= Vector3D.left * Time.deltaTime * 5;
+                owner.transform.position += Vector3D.left * Time.deltaTime * 5;
             if (Input.IsKeyDown(Key.D))
-                owner.transform.position -= Vector3D.right * Time.deltaTime * 5;
+                owner.transform.position += Vector3D.right * Time.deltaTime * 5;
             if (Input.IsKeyDown(Key.E))
                 owner.transform.position += Vector3D.up * Time.deltaTime * 5;
             if (Input.IsKeyDown(Key.Q))

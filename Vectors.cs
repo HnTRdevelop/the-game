@@ -36,8 +36,8 @@ namespace HnTRgine.Vectors
 
         public static Vector2D up = new Vector2D(0, 1);
         public static Vector2D down = new Vector2D(0, -1);
-        public static Vector2D right = new Vector2D(1, 0);
-        public static Vector2D left = new Vector2D(-1, 0);
+        public static Vector2D right = new Vector2D(-1, 0);
+        public static Vector2D left = new Vector2D(1, 0);
     }
 
     class Vector2I
@@ -62,8 +62,8 @@ namespace HnTRgine.Vectors
 
         public static Vector2I up = new Vector2I(0, 1);
         public static Vector2I down = new Vector2I(0, -1);
-        public static Vector2I right = new Vector2I(1, 0);
-        public static Vector2I left = new Vector2I(-1, 0);
+        public static Vector2I right = new Vector2I(-1, 0);
+        public static Vector2I left = new Vector2I(1, 0);
     }
 
     class Vector3D
@@ -104,8 +104,8 @@ namespace HnTRgine.Vectors
         public static Vector3D down = new Vector3D(0, -1, 0);
         public static Vector3D forward = new Vector3D(0, 0, 1);
         public static Vector3D back = new Vector3D(0, 0, -1);
-        public static Vector3D right = new Vector3D(1, 0, 0);
-        public static Vector3D left = new Vector3D(-1, 0, 0);
+        public static Vector3D right = new Vector3D(-1, 0, 0);
+        public static Vector3D left = new Vector3D(1, 0, 0);
     }
 
     class Vector3I
@@ -132,7 +132,7 @@ namespace HnTRgine.Vectors
         public static Vector3I down = new Vector3I(0, -1, 0);
         public static Vector3I forward = new Vector3I(0, 0, 1);
         public static Vector3I back = new Vector3I(0, 0, -1);
-        public static Vector3I right = new Vector3I(1, 0, 0);
-        public static Vector3I left = new Vector3I(-1, 0, 0);
+        public static Vector3I right = new Vector3I(-1, 0, 0);
+        public static Vector3I left = new Vector3I(1, 0, 0);
     }
 }

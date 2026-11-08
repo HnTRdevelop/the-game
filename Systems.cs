@@ -75,4 +75,20 @@ namespace HnTRgine.Systems
 
         public override void Update(Entity entity) => entity.GetComponent<Camera>().FetchData(entity);
     }
+
+    class MeshRendererSystem : System
+    {
+        public override Type[] RequiredComponents { get; protected set; } = [
+            typeof(Mesh)
+        ];
+
+        public override void Update(Entity entity)
+        {
+            Mesh mesh = entity.GetComponent<Mesh>();
+            Raylib.DrawModel(
+                Raylib.LoadModelFromMesh(mesh.mesh),
+                entity.transform.position,
+                1.0f, Color.Red);
+        }
+    }
 }

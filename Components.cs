@@ -1,13 +1,13 @@
 using Raylib_cs;
 using System.Text.Json;
 using System.Text.Json.Nodes;
-using System.Numerics;
 
 
 namespace HnTRgine.Components
 {
     using HnTRgine.Vectors;
     using HnTRgine.EntityManagement;
+    using System.Numerics;
 
     abstract class Component
     {
@@ -147,10 +147,42 @@ namespace HnTRgine.Components
 
     class Mesh : Component
     {
-        public static Mesh LoadFromFile(string filepath) => new Mesh();
-        public Vector3D[] verticies;
-        public Vector3D[] normals;
+        private Raylib_cs.Mesh _mesh;
+        public Raylib_cs.Mesh mesh { get => _mesh; }
+        public Vector3[] verticies;
+        public Vector3[] normals;
         public int[] triangles;
-        public Vector2D[] UV;
+
+        public Mesh()
+        {
+            _mesh = MakeTriangle();
+        }
+
+        ~Mesh()
+        {
+            Raylib.UnloadMesh(_mesh);
+        }
+
+        static unsafe Raylib_cs.Mesh MakeTriangle()
+        {
+            Raylib_cs.Mesh mesh = new Raylib_cs.Mesh();
+            mesh.VertexCount = 3;
+            mesh.TriangleCount = 1;
+
+            mesh.Vertices  = (float*)Raylib.MemAlloc((uint)(mesh.VertexCount * 3 * sizeof(float)));
+
+            float[] v = {
+                0, 0, 0,
+                0, 1, 0,
+                1, 1, 0
+            };
+
+            for (int i = 0; i < v.Length; i++) mesh.Vertices[i]  = v[i];
+
+            Raylib.UploadMesh(ref mesh, false);
+            return mesh;
+        }
+
+        public static Mesh LoadFromFile(string filepath) => new Mesh();
     }
 }
